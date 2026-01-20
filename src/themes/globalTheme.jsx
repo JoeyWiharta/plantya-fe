@@ -1,0 +1,245 @@
+import { createTheme } from "@mui/material/styles";
+
+const baseColors = {
+  // Brand Colors
+  green: "#007C4F",
+  greenLight: "#00A86B",
+  red: "#DC3545",
+  blue: "#1976D2",
+  lightBlue: "#60A5FA",
+  darkBlue: "#24427D",
+  yellow: "#FFC107",
+
+  // Neutral Colors
+  white: "#FFFFFF", // Text White Global
+  grey: "#A3B2AC",
+
+  // =========== Start Revision Color Design ==========
+
+  neutralBlack: "#121212", // First Background
+  darkBlack: "#1A1A1A ", // Second Background
+  midnightBlack: "#0D0D0D", // Third Background
+
+  // =========== End Revision Color Design ==========
+
+
+
+
+  // Textfield config color
+  darkGrey: "#222222", // Background Textfield
+  lightGrey: "#AAAAAA" // Placeholder color
+};
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+
+    tonalOffset: 0,
+    contrastThreshold: 0,
+
+    // Brand Colors
+    primary: {
+      main: baseColors.green,
+      light: baseColors.greenLight,
+    },
+    secondary: {
+      main: baseColors.grey,
+      dark: baseColors.darkGrey,
+      contrastText: baseColors.white,
+    },
+    info: {
+      main: baseColors.blue,
+      light: baseColors.lightBlue,
+      dark: baseColors.darkBlue,
+    },
+    success: {
+      main: baseColors.green,
+    },
+    error: {
+      main: baseColors.red,
+    },
+    warning: {
+      main: baseColors.yellow,
+      contrastText: baseColors.white,
+    },
+
+    // Background Colors - DARK MODE
+    background: {
+      default: baseColors.neutralBlack,
+      paper: baseColors.darkBlack,
+      elevated: baseColors.midnightBlack,
+    },
+
+    // Text Colors - DARK MODE
+    text: {
+      primary: baseColors.white,
+      secondary: baseColors.grey,
+      secondaryLight: baseColors.lightGrey
+    },
+
+    divider: baseColors.grey,
+
+    action: {
+      hover: "#1F1F1F",
+      selected: "#1F1F1F",
+    },
+  },
+
+  typography: {
+    fontFamily: "Poppins, sans-serif",
+  },
+
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          backgroundColor: `${baseColors.darkBlack} !important`,
+          backgroundImage: "none !important",
+          ...(ownerState?.variant === "elevation" && {
+            backgroundColor: `${baseColors.darkBlack} !important`,
+          }),
+          ...(ownerState?.variant === "outlined" && {
+            backgroundColor: `${baseColors.darkBlack} !important`,
+          }),
+        }),
+      },
+    },
+
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.auth-field": {
+
+
+            "& .MuiOutlinedInput-root": {
+              marginTop: 1,
+              backgroundColor: theme.palette.secondary.dark,
+              borderRadius: "15px",
+              transition: "all 0.3s ease",
+
+              "&.Mui-disabled": {
+                backgroundColor: "#3a3a3a",
+                "& .MuiInputBase-input": {
+                  color: "#b0b0b0",
+                  WebkitTextFillColor: "#b0b0b0",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#555555",
+                },
+                "& .MuiInputAdornment-root .MuiSvgIcon-root": {
+                  color: "#b0b0b0",
+                },
+              },
+
+              "& fieldset": { borderWidth: "0.7px" },
+              "&:hover:not(.Mui-disabled) fieldset": { borderWidth: "2px", borderColor: theme.palette.primary.light, },
+              "&.Mui-focused fieldset": { borderWidth: "2px", borderColor: theme.palette.primary.light },
+              "&.Mui-autofilled fieldset": { borderWidth: "2px", borderColor: theme.palette.primary.light },
+
+              // Autofill untuk Webkit browsers
+              "& input:-webkit-autofill": {
+                WebkitBoxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+                boxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+                WebkitTextFillColor: `${theme.palette.text.primary} !important`,
+                transition: "background-color 5000s ease-in-out 0s !important",
+              },
+              "& input:-webkit-autofill:hover": {
+                WebkitBoxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+                boxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+              },
+              "& input:-webkit-autofill:focus": {
+                WebkitBoxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+                boxShadow: `0 0 0 1000px ${theme.palette.secondary.dark} inset !important`,
+              },
+
+              // Autofill untuk Firefox
+              "& input:-moz-autofill": {
+                background: `${theme.palette.secondary.dark} !important`,
+                color: `${theme.palette.text.primary} !important`,
+              },
+              "& input:-moz-autofill:hover": {
+                background: `${theme.palette.secondary.dark} !important`,
+                color: `${theme.palette.text.primary} !important`,
+              },
+              "& input:-moz-autofill:focus": {
+                background: `${theme.palette.secondary.dark} !important`,
+                color: `${theme.palette.text.primary} !important`,
+              },
+
+              // Input styling
+              "& input": { color: theme.palette.text.secondaryLight },
+              "& input:not(:placeholder-shown)": { color: theme.palette.text.primary },
+              "& .MuiInputBase-input::placeholder": {
+                color: theme.palette.text.secondaryLight,
+                borderWidth: "2px"
+              },
+            },
+
+            "& .MuiInputBase-input::placeholder": {
+              color: theme.palette.text.secondaryLight,
+              opacity: 1,
+            },
+
+            // ✅ Helper text dalam normal flow
+            "& .MuiFormHelperText-root": {
+              position: "absolute",
+              top: "100%",
+              left: "8px",
+              right: "8px",
+              marginTop: "4px",
+              marginBottom: 0,
+              fontSize: "0.75rem",
+              lineHeight: 1.3,
+              // Biarkan text wrap
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              overflowWrap: "break-word",
+            },
+          },
+        }),
+      },
+    },
+
+    MuiButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.auth-button": {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.text.primary,
+            borderRadius: 15,
+            fontWeight: 600,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.light,
+            },
+          },
+
+          "&.linkto-button": {
+            color: theme.palette.primary.main,
+            textTransform: "none",
+            "&:hover": {
+              textDecoration: "underline",
+              backgroundColor: "transparent",
+            },
+          },
+        }),
+      },
+    },
+
+    MuiDivider: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderColor: theme.palette.divider,
+        }),
+      },
+    },
+  },
+});
+
+// Export untuk kompatibilitas future
+export const lightTheme = {};
+export const themes = {
+  dark: darkTheme,
+  light: null,
+};
+
+export default darkTheme;

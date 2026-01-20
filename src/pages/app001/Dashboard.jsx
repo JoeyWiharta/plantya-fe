@@ -1,0 +1,82 @@
+import React, { useState } from "react";
+import { Paper, Container } from "@mui/material";
+import { Typography, Button, Grid } from '@mui/material';
+import RootPageCustom from "../../components/common/RootPageCustom";
+
+const Dashboard = () => {
+
+    const [firstRender, setFirstRender] = useState(false)
+    const [app001p01Page, setApp001p01Page] = useState(true);
+
+    const [app001Msg, setApp001setMsg] = useState("");
+    const [app001MsgStatus, setApp001setMsgStatus] = useState("");
+
+
+    return (
+        <React.Fragment>
+            <RootPageCustom
+                msgStateGet={app001Msg}
+                msgStateSet={setApp001setMsg}
+                msgStateGetStatus={app001MsgStatus}
+                setFirstRender={setFirstRender}
+            >
+                <Container
+                    // maxWidth="xl"
+                    maxWidth={false}
+                    sx={{
+                        display: app001p01Page ? "block" : "none",
+                        bgcolor: 'secondary.main'
+                    }}
+                >
+                    <Typography variant="h4" gutterBottom>
+                        Halaman Dashboard
+                    </Typography>
+                    <Typography>
+                        Ini adalah contoh bagaimana menggunakan komponen AlertMessage yang Anda buat.
+                    </Typography>
+
+                    <Grid container spacing={2} sx={{ mt: 3 }}>
+                        <Grid >
+                            <Button
+                                variant="contained"
+                                color="success"
+                                onClick={() => {
+                                    setApp001setMsg("Data berhasil disimpan!")
+                                    setApp001setMsgStatus("success")
+                                }}
+                            >
+                                Tampilkan Alert Sukses
+                            </Button>
+                        </Grid>
+                        <Grid >
+                            <Button
+                                variant="contained"
+                                color="error"
+                                onClick={() => {
+                                    setApp001setMsg("Terjadi kesalahan pada server!")
+                                    setApp001setMsgStatus("error")
+                                }}
+                            >
+                                Tampilkan Alert Error
+                            </Button>
+                        </Grid>
+                        <Grid >
+                            <Button
+                                variant="contained"
+                                color="warning"
+                                onClick={() => {
+                                    setApp001setMsg("Warning  pada server!");
+                                    setApp001setMsgStatus("warning")
+                                }}                        >
+                                Tampilkan Alert Warning
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Container>
+
+
+            </RootPageCustom>
+        </React.Fragment >
+    );
+}
+export default Dashboard;
